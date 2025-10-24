@@ -2,15 +2,25 @@
 
 /* Define a function `addFour()` that takes a single argument 
    and returns a value 4 greater than the input.*/
+   
+   const addFour = (num) => {
+    return num + 4;
+   };
 
    
 /* Create and log a variable `twelve` that is the result of passing 8 to your
    addFour() function. */
+   let twelve = addFour(8);
+   console.log(twelve);
 
    
 /* Create and log a variable `twelveString` that is the result of passing "8" 
    (a string) to your addFour() function. Consider what this tells you about how
   the function should be explained (e.g., in a comment). */
+  let twelveString = addFour("8");
+  console.log(twelveString);
+
+  // This tell me that when adding an integer value to a string, it would turn the value into a string and then do string combination.
 
   
 
@@ -26,6 +36,10 @@
      http://www.mathwarehouse.com/calculators/continuous-compound-interest-calculator.php
 */
 
+   const compoundInterest = (principle, rate, years) => {
+    return principle * Math.exp(rate * years);
+   };
+
 
 
 /* Define a function `fizzBuzz()` that takes in a single number as an argument.
@@ -36,6 +50,25 @@
    should contain "FizzBuzz" instead of the number.
    The returned array should be empty for arguments less than 1. */
 
+   const fizzBuzz = (num) => {
+    if (num < 1) {
+      return [];
+    }
+    const result = [];
+    
+    for (let i = 1; i <= num; i++) {
+      if (i % 3 === 0 && i % 5 === 0) {
+        result.push("FizzBuzz");
+      } else if (i % 3 === 0) {
+        result.push("Fizz");
+      } else if (i % 5 === 0) {
+        result.push("Buzz");
+      } else {
+        result.push(i);
+      }
+    }
+    return result;
+   };
    
 
 /* Define a function `getLetterFrequencies()` that takes in a single string as 
@@ -47,6 +80,22 @@
    each letter, increase the value associated with that key by one. Watch out 
    for if the letter is not in the Object yet!
    You can test this method with a word like "Mississippi". */
+
+    const getLetterFrequencies = (str) => {
+      const frequencies = {}; 
+    
+      for (let i = 0; i < str.length; i++) {
+        const letter = str[i];
+
+        if (!frequencies[letter]) {
+          frequencies[letter] = 1;
+        } else {
+          frequencies[letter]++;
+        }
+      }
+
+      return frequencies;
+    };
 
    
 
@@ -62,7 +111,20 @@
     
     You can log out the `deck` to check your work! */
 
-    
+    const suits = ["hearts", "diamonds", "clubs", "spades"];
+    const deck = [];
+
+    for (let i = 0; i < suits.length; i++) {
+      for (let rank = 2; rank <= 14; rank++) {
+        deck.push({
+          suit: suits[i],
+          rank: rank
+        });
+      }
+    }
+
+    console.log(deck);
+
 
 //You can test the below functions by creating e.g., a `pokerHand` array that 
 //contains five cards from the `deck`.
@@ -72,6 +134,16 @@
    is in that array.
    Hint: use a loop to check each card. */
 
+   const containsQueenOfHearts = (hand) => {
+      for (let i = 0; i < hand.length; i++) {
+        const card = hand[i];
+        if (card.suit === "hearts" && card.rank === 12) {
+          return true;
+        }
+      }
+      return false;
+    };
+
    
 
 /* Define a function `getHighCard()` that takes in an array of "card" objects
@@ -79,10 +151,40 @@
   with the highest rank. Cards of different suits but the same rank are 
   considered to have the same value, and either is a valid result */
 
+  const getHighCard = (hand) => {
+    if (hand.length === 0) {
+      return null; 
+    }
+    let highCard = hand[0];
+    for (let i = 1; i < hand.length; i++) {
+      if (hand[i].rank > highCard.rank) {
+        highCard = hand[i];
+      }
+    }
+
+    return highCard;
+  };
+
   
 
 /* Define a function `isFlush()` that takes in an array of "card" objects and
    returns whether or not the cards all have the same _suit_. */
+
+   const isFlush = (hand) => {
+    if (hand.length === 0) {
+      return false;
+    }
+
+    const firstSuit = hand[0].suit; 
+
+    for (let i = 1; i < hand.length; i++) {
+      if (hand[i].suit !== firstSuit) {
+        return false;
+      }
+    }
+
+    return true;
+  };
 
    
 
